@@ -33,6 +33,14 @@ public class Flight {
     }
     
     public boolean addPassenger(PassengerTicket passenger){
+        if(passenger == null){
+            return false;
+        }
+        for (PassengerTicket p : passengers) {
+            if(p.getPassportNumber().equals(passenger.getPassportNumber())){
+                return false;
+            }
+        }
         if(passengers.size()<capacity){
             this.passengers.add(passenger);
             return true;
