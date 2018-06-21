@@ -1,9 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.pernix.model;
+package com.pernix.passenger.model;
+
+import java.util.Objects;
 
 
 /**
@@ -13,25 +10,22 @@ package com.pernix.model;
 public class PassengerTicket {
     private String name;
     private String passportNumber;
-    private Flight flight;
     private String gate;
-    private String flightClass;
     private String seat;
     private String boardingTime;
+    private boolean checkIn;
 
     public PassengerTicket() {
     }
 
-    public PassengerTicket(String name, String passportNumber, Flight flight, String gate, String flightClass, String seat, String boardingTime) {
+    public PassengerTicket(String name, String passportNumber, String gate, String seat, String boardingTime) {
         this.name = name;
         this.passportNumber = passportNumber;
-        this.flight = flight;
         this.gate = gate;
-        this.flightClass = flightClass;
         this.seat = seat;
         this.boardingTime = boardingTime;
     }
-
+    
     public String getName() {
         return name;
     }
@@ -48,28 +42,12 @@ public class PassengerTicket {
         this.passportNumber = passportNumber;
     }
 
-    public Flight getFlight() {
-        return flight;
-    }
-
-    public void setFlight(Flight flight) {
-        this.flight = flight;
-    }
-
     public String getGate() {
         return gate;
     }
 
     public void setGate(String gate) {
         this.gate = gate;
-    }
-
-    public String getFlightClass() {
-        return flightClass;
-    }
-
-    public void setFlightClass(String flightClass) {
-        this.flightClass = flightClass;
     }
 
     public String getSeat() {
@@ -87,5 +65,16 @@ public class PassengerTicket {
     public void setBoardingTime(String boardingTime) {
         this.boardingTime = boardingTime;
     }
-        
+
+    public boolean isCheckIn() {
+        return checkIn;
+    }
+
+    public void setCheckIn(boolean checkIn) {
+        this.checkIn = checkIn;
+    }
+    
+    
+    
+
 }
