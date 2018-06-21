@@ -12,24 +12,24 @@ package com.pernix.model;
  */
 public class PassengerTicket {
     private String name;
+    private String passportNumber;
     private Flight flight;
     private String gate;
+    private String flightClass;
     private String seat;
-    private String date;
     private String boardingTime;
-    private String departingTime;
 
     public PassengerTicket() {
     }
 
-    public PassengerTicket(String name, Flight flight, String gate, String seat, String date, String boardingTime, String departingTime) {
+    public PassengerTicket(String name, String passportNumber, Flight flight, String gate, String flightClass, String seat, String boardingTime) {
         this.name = name;
+        this.passportNumber = passportNumber;
         this.flight = flight;
         this.gate = gate;
+        this.flightClass = flightClass;
         this.seat = seat;
-        this.date = date;
         this.boardingTime = boardingTime;
-        this.departingTime = departingTime;
     }
 
     public String getName() {
@@ -38,6 +38,14 @@ public class PassengerTicket {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
     }
 
     public Flight getFlight() {
@@ -56,20 +64,20 @@ public class PassengerTicket {
         this.gate = gate;
     }
 
+    public String getFlightClass() {
+        return flightClass;
+    }
+
+    public void setFlightClass(String flightClass) {
+        this.flightClass = flightClass;
+    }
+
     public String getSeat() {
         return seat;
     }
 
     public void setSeat(String seat) {
         this.seat = seat;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public String getBoardingTime() {
@@ -79,19 +87,5 @@ public class PassengerTicket {
     public void setBoardingTime(String boardingTime) {
         this.boardingTime = boardingTime;
     }
-
-    public String getDepartingTime() {
-        return departingTime;
-    }
-
-    public void setDepartingTime(String departingTime) {
-        this.departingTime = departingTime;
-    }
-
-    @Override
-    public String toString() {
-        return "Passenger{" + "name=" + name + ", flight=" + flight + ", gate=" + gate + ", seat=" + seat + ", date=" + date + ", boardingTime=" + boardingTime + ", departingTime=" + departingTime + '}';
-    }
-    
-    
+        
 }
