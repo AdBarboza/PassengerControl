@@ -51,7 +51,7 @@ public class FlightTest {
     }
     
     @Test
-    public void testAddPassengerInPassengers() {
+    public void testAddPassengerAlreadyInPassengers() {
         PassengerTicket passenger = new PassengerTicket("Juan", "123456789",
                 "E12", "A22", "03:12:00");
         assertTrue(flight.addPassenger(passenger));
@@ -93,49 +93,183 @@ public class FlightTest {
                 "E12", "A24", "03:12:00");
         assertTrue(flight.addPassenger(passenger));        
     }
-
+    
     /**
      * Test of removePassenger method, of class Flight.
      */
+    
     @Test
-    public void testRemovePassenger() {
-        System.out.println("removePassenger");
-        String passportCode = "";
-        Flight instance = new Flight();
-        boolean expResult = false;
-        boolean result = instance.removePassenger(passportCode);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testRemovePassengerNotInPassengers() {
+        PassengerTicket passenger = new PassengerTicket("Juan", "123456789",
+                "E12", "A22", "03:12:00");
+        flight.addPassenger(passenger);
+        String passportCode = "123456";
+        
+        assertFalse(flight.removePassenger(passportCode));
+    }
+    
+    @Test
+    public void testRemovePassenger1() {
+        PassengerTicket passenger = new PassengerTicket("Juan", "123456789",
+                "E12", "A22", "03:12:00");
+        flight.addPassenger(passenger);
+        String passportCode = "123456789";
+        assertTrue(flight.removePassenger(passportCode));
     }
 
+    @Test
+    public void testRemovePassenger2() {
+        PassengerTicket passenger = new PassengerTicket("Juan", "123456789",
+                "E12", "A22", "03:12:00");
+        flight.addPassenger(passenger);
+        
+        passenger = new PassengerTicket("Juan", "12345229","E12", "A23",
+                "03:12:00");
+        flight.addPassenger(passenger);
+        
+        String passportCode = "123456789";
+        assertTrue(flight.removePassenger(passportCode));
+    }
+    
+    @Test
+    public void testRemovePassenger3() {
+        PassengerTicket passenger = new PassengerTicket("Juan", "123456789",
+                "E12", "A22", "03:12:00");
+        flight.addPassenger(passenger);
+        
+        passenger = new PassengerTicket("Juan", "12345229","E12", "A23",
+                "03:12:00");
+        flight.addPassenger(passenger);
+        
+        passenger = new PassengerTicket("Juan", "1234512329","E12", "A23",
+                "03:12:00");
+        flight.addPassenger(passenger);
+        
+        String passportCode = "12345229";
+        assertTrue(flight.removePassenger(passportCode));
+    }
+    
     /**
      * Test of countPassengers method, of class Flight.
      */
     @Test
-    public void testCountPassengers() {
-        System.out.println("countPassengers");
-        Flight instance = new Flight();
+    public void testCountPassengersWhileIsNotPassengers() {
         int expResult = 0;
-        int result = instance.countPassengers();
+        int result = flight.countPassengers();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    }
+    
+    @Test
+    public void testCountPassengers1() {
+        int expResult = 0;
+        int result = flight.countPassengers();
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testCountPassengers2() {
+        PassengerTicket passenger = new PassengerTicket("Juan", "123456789",
+                "E12", "A22", "03:12:00");
+        flight.addPassenger(passenger);
+        
+        int expResult = 1;
+        int result = flight.countPassengers();
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testCountPassengers3() {
+        PassengerTicket passenger = new PassengerTicket("Juan", "123456789",
+                "E12", "A22", "03:12:00");
+        flight.addPassenger(passenger);
+        
+        passenger = new PassengerTicket("Juan", "12345229","E12", "A23",
+                "03:12:00");
+        flight.addPassenger(passenger);
+        
+        int expResult = 2;
+        int result = flight.countPassengers();
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testCountPassengers4() {
+        PassengerTicket passenger = new PassengerTicket("Juan", "123456789",
+                "E12", "A22", "03:12:00");
+        flight.addPassenger(passenger);
+        
+        passenger = new PassengerTicket("Juan", "12345229","E12", "A23",
+                "03:12:00");
+        flight.addPassenger(passenger);
+        flight.removePassenger("123456789");
+        
+        int expResult = 1;
+        int result = flight.countPassengers();
+        assertEquals(expResult, result);
     }
 
     /**
      * Test of checkInPassenger method, of class Flight.
      */
+    
     @Test
-    public void testCheckInPassenger() {
-        System.out.println("checkInPassenger");
-        String passportCode = "";
-        Flight instance = new Flight();
-        boolean expResult = false;
-        boolean result = instance.checkInPassenger(passportCode);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testCheckInPassengerNotInPassengers() {
+        PassengerTicket passenger = new PassengerTicket("Juan", "123456789",
+                "E12", "A22", "03:12:00");
+        flight.addPassenger(passenger);
+        
+        passenger = new PassengerTicket("Juan", "12345229","E12", "A23",
+                "03:12:00");
+        flight.addPassenger(passenger);
+        
+        assertFalse(flight.checkInPassenger("12345464"));
+    }
+    
+    @Test
+    public void testCheckInPassengerAlreadyCheckIn() {
+        PassengerTicket passenger = new PassengerTicket("Juan", "123456789",
+                "E12", "A22", "03:12:00");
+        flight.addPassenger(passenger);
+        
+        flight.checkInPassenger("123456789");
+        
+        assertFalse(flight.checkInPassenger("123456789"));
+    }
+    
+    @Test
+    public void testCheckInPassenger1() {
+        PassengerTicket passenger = new PassengerTicket("Juan", "123456789",
+                "E12", "A22", "03:12:00");
+        flight.addPassenger(passenger);
+        
+        assertTrue(flight.checkInPassenger("123456789"));
+    }
+    
+    @Test
+    public void testCheckInPassenger2() {
+        PassengerTicket passenger = new PassengerTicket("Juan", "123456789",
+                "E12", "A22", "03:12:00");
+        flight.addPassenger(passenger);
+        
+        passenger = new PassengerTicket("Juan", "12345229","E12", "A23",
+                "03:12:00");
+        flight.addPassenger(passenger);
+        
+        assertTrue(flight.checkInPassenger("12345229"));
+    }
+    
+    @Test
+    public void testCheckInPassenger3() {
+        PassengerTicket passenger = new PassengerTicket("Juan", "123456789",
+                "E12", "A22", "03:12:00");
+        flight.addPassenger(passenger);
+        
+        passenger = new PassengerTicket("Juan", "12345229","E12", "A23",
+                "03:12:00");
+        flight.addPassenger(passenger);
+        
+        assertTrue(flight.checkInPassenger("123456789"));
+        assertTrue(flight.checkInPassenger("12345229"));
     }
 
     

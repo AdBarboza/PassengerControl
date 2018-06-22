@@ -65,8 +65,11 @@ public class Flight {
     public boolean checkInPassenger(String passportCode){
         for (PassengerTicket passenger : passengers) {
             if(passenger.getPassportNumber().equals(passportCode)){
-                passenger.setCheckIn(true);
-                return true;
+                if(!passenger.isCheckIn()){
+                    passenger.setCheckIn(true);
+                    return true;
+                }
+                return false;
             }
         }
         return false;
