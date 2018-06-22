@@ -33,6 +33,14 @@ public class Flight {
     }
     
     public boolean addPassenger(PassengerTicket passenger){
+        if(passenger == null){
+            return false;
+        }
+        for (PassengerTicket p : passengers) {
+            if(p.getPassportNumber().equals(passenger.getPassportNumber())){
+                return false;
+            }
+        }
         if(passengers.size()<capacity){
             this.passengers.add(passenger);
             return true;
@@ -57,8 +65,11 @@ public class Flight {
     public boolean checkInPassenger(String passportCode){
         for (PassengerTicket passenger : passengers) {
             if(passenger.getPassportNumber().equals(passportCode)){
-                passenger.setCheckIn(true);
-                return true;
+                if(!passenger.isCheckIn()){
+                    passenger.setCheckIn(true);
+                    return true;
+                }
+                return false;
             }
         }
         return false;
